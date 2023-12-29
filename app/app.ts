@@ -1,9 +1,9 @@
-const { Client, LocalAuth } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
+import { Client, LocalAuth, Message } from 'whatsapp-web.js';
+import qrcode from 'qrcode-terminal';
 
 const client = new Client({
     authStrategy: new LocalAuth({
-        dataPath: 'sessions'
+        dataPath: '/sessions'
     })
 });
 
@@ -15,7 +15,7 @@ client.on('ready', () => {
     console.log('Client is ready!');
 });
 
-client.on('message', async message => {
+client.on('message', async (message: Message) => {
 	console.log(message.body);
 
     if(message.body === '!ping') {
