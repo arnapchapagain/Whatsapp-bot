@@ -3,7 +3,7 @@ import qrcode from 'qrcode-terminal';
 
 const client = new Client({
     authStrategy: new LocalAuth({
-        dataPath: '/sessions'
+        dataPath: '/session'
     })
 });
 
