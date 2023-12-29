@@ -4,10 +4,8 @@
   "description": "A whatsapp-otp API and library using whatsapp-web.js",
   "main": "index.js",
   "scripts": {
-    "devApp": "nodemon app/app.ts",
-    "devApi": "nodemon api/index.ts",
-    "startApp": "node dist/app/app.js",
-    "startApi": "node dist/api/index.js"
+    "dev": "nodemon src/index.ts",
+    "start": "node dist/app.js"
   },
   "repository": {
     "type": "git",
