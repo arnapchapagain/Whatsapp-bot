@@ -41,8 +41,8 @@ client.on('authentication_failure', () => {
 });
 
 client.on('message_ack', (message: Message, ack: MessageAck) => {
-    let sentTo = message.to;
-    let messageId = message.id;
+    let sentTo = '+' + message.to.replace('@c.us', '');
+    let messageId = message.id.id;
     if (ack === MessageAck.ACK_ERROR){
         console.log(`Message ${messageId} sent to ${sentTo} failed to send`);
     }
