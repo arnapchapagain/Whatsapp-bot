@@ -5,6 +5,7 @@ import qrcode from 'qrcode-terminal';
 import clientReadyMiddleware from './middleware/clientReadyMiddleware';
 
 const app = express();
+app.use(express.json());
 
 client.initialize();
 
@@ -25,11 +26,6 @@ client.on('qr', qr => {
 client.on('ready', async () => {
     console.log('Client is ready!');
     globalThis.IS_READY = true;
-
-    let chats: Chat[] = await client.getChats();
-    chats.forEach(chat => {
-        console.log(chat.name);
-    });
 });
 
 
@@ -62,7 +58,35 @@ app.get('/me', clientReadyMiddleware, async (req: Request, res: Response) => {
         me: me
     });
 });
- 
+
+
+app.post('/is_valid', clientReadyMiddleware, async (req: Request, res: Response) => {
+    if (!req.body.number){
+        return res.status(400).send({
+            error: 'Missing number on request body'
+        });
+    }
+    var number: string = req.body.number as string;
+
+    if (!(/^\+[0-9]*?$/.test(number))) {
+        return res.status(400).send({
+            error: 'Invalid number format. Use E.164 format, i.e. [+][country-code][10-digit-number-without-dashes]'
+        });
+    } 
+
+    // remove the + from the number
+    number = number.replace(/\+/g, '');
+
+    // add @c.us if it's not present because whatsapp ID must be in this format to be checked by the whatsapp-web.js library
+    if (!number.endsWith('@c.us')) {
+        number += '@c.us';
+    }
+    
+    let isValid = await client.isRegisteredUser(number);
+    res.status(200).send({
+        is_valid: isValid
+    });
+});
 
 app.listen(3000, () => {
     console.log('Server started at http://localhost:3000');
