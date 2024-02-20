@@ -1,8 +1,13 @@
-// create a middleware for express that checks the global IS_READY and IS_AUTHENTICATED variables
-
 import type { NextFunction, Request, Response } from 'express'
 
-export default function clientReadyMiddleware (req: Request, res: Response, next: NextFunction): void {
+/**
+ * Checks if the client is ready to be used
+ * @param req express request
+ * @param res express response
+ * @param next express next function
+ * @returns void
+ */
+export default function isClientReady (req: Request, res: Response, next: NextFunction): void {
   if (!globalThis.IS_AUTHENTICATED) {
     res.status(401).send({
       error: {
