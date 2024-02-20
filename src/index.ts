@@ -4,13 +4,13 @@ import client from './client'
 import clientReadyMiddleware from './middleware/clientMiddlewares'
 
 import { exit } from 'process'
-import messagesRouter from './routes/messagesRouter'
+import groupsRouter from './routes/groupsRouter'
 import usersRouter from './routes/usersRouter'
 
 const app = express()
 app.use(express.json())
 app.use('/users', usersRouter)
-app.use('/messages', messagesRouter)
+app.use('/groups', groupsRouter)
 
 client.initialize()
   .then(() => {
