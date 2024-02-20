@@ -1,12 +1,16 @@
 import express, { type Request, type Response } from 'express'
+import { exit } from 'process'
 import qrcode from 'qrcode-terminal'
-import { MessageAck, type Message } from 'whatsapp-web.js'
+import { MessageAck, type Client, type Message } from 'whatsapp-web.js'
+
 import client from './client'
 import clientReadyMiddleware from './middleware/clientReadyMiddleware'
 import numberVerifyMiddleware from './middleware/numberVerifyMiddleware'
+import usersRouter from './routes/usersRouter'
 
 const app = express()
 app.use(express.json())
+app.use('/users', usersRouter)
 
 client.initialize()
   .catch(err => {
@@ -19,10 +23,13 @@ declare global {
   var IS_READY: boolean
   // eslint-disable-next-line no-var
   var IS_AUTHENTICATED: boolean
+  // eslint-disable-next-line no-var
+  var client: Client
 }
 
 globalThis.IS_READY = false
 globalThis.IS_AUTHENTICATED = false
+globalThis.client = client
 
 client.on('qr', qr => {
   qrcode.generate(qr, { small: true })
@@ -40,6 +47,7 @@ client.on('authenticated', () => {
 
 client.on('authentication_failure', () => {
   console.log('Auth failure!')
+  exit(1)
 })
 
 client.on('message_ack', (message: Message, ack: MessageAck) => {
@@ -69,13 +77,6 @@ app.get('/', (req: Request, res: Response) => {
 app.get('/status', clientReadyMiddleware, (req: Request, res: Response) => {
   res.status(200).send({
     message: 'Client is ready and authenticated'
-  })
-})
-
-app.get('/me', clientReadyMiddleware, (req: Request, res: Response) => {
-  const me = client.info.wid
-  res.status(200).send({
-    me
   })
 })
 
