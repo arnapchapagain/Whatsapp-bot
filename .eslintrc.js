@@ -26,5 +26,7 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
+    '@typescript-eslint/no-misused-promises': 'off',
+    'no-var': 'off'
   }
 }
