@@ -9,6 +9,7 @@ id = 81a1a3f0-01b8-4142-ae08-e3822a0be47f
 
 [config.relations.collections]
 rootDirectory = postman/collections
+files[] = {"id":"31989932-8ac4c3f5-ad70-4cce-b7eb-2ec4103f9cbe","path":"/.json","metaData":{}}
 
 [config.relations.collections.metaData]
 
@@ -16,5 +17,5 @@ rootDirectory = postman/collections
 files[] = {"path":"index.json","metaData":{}}
 
 [config.relations.apiDefinition.metaData]
-type = openapi:3
 rootFiles[] = index.json
+type = openapi:3
