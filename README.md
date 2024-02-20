@@ -1,6 +1,6 @@
 # Whatsapp Unofficial API
 
-This is an BASIC unofficial API for Whatsapp Web mainly for sending messages. It is based on the whatsapp-web.js library by @pedroslopez which runs the WhatsApp Web UI on Puppeteer.
+This is an unofficial API for Whatsapp Web mainly for sending messages. It is based on the whatsapp-web.js library by @pedroslopez which runs the WhatsApp Web UI on Puppeteer.
 
 ## Installation
 This should install all the dependencies for the project to run. The main ones are whatsapp-web.js and express.
