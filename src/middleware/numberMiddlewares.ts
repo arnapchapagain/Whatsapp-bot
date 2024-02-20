@@ -1,6 +1,13 @@
 import type { NextFunction, Request, Response } from 'express'
 
-export default function numberVerifyMiddleware (req: Request, res: Response, next: NextFunction): void {
+/**
+ * Checks if the number is in the correct format, and formats it to be used by the whatsapp-web.js library
+ * @param req The request object
+ * @param res The response object
+ * @param next The next function
+ * @returns void
+ */
+export default function numberFormater (req: Request, res: Response, next: NextFunction): void {
   let number = req.body.number as string ?? ''
   if (number === '') {
     res.status(400).send({
