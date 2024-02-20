@@ -12,8 +12,7 @@ This is an unofficial API for Whatsapp Web mainly for sending messages. It is ba
     - [Verify if the a number is valid on WhatsApp](#verify-if-the-a-number-is-valid-on-whatsapp)
     - [Sending a message](#sending-a-message)
 4. [Extras](#extras)
-5. [TODO](#todo)
-6. [Note](#note)    
+5. [TODO](#todo)  
 
 ## Installation
 This should install all the dependencies for the project to run. The main ones are whatsapp-web.js and express.
@@ -139,5 +138,3 @@ Whenever the status of the sent message changes (example message seen by the use
 - [ ] Get the status of a group.
 - [ ] Set group user's privilages.
 
-## Note
-This is a very basic API and is not meant to be used in production. It is just a proof of concept. The API can be extended to do a lot more things as per your needs. Feel free to fork the repo and make changes as per your needs.
