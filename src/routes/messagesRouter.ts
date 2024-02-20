@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { sendMessageToUser } from '../controllers/messagesControllers'
+import { sendMessage } from '../controllers/messagesControllers'
 import isClientReady from '../middleware/clientMiddlewares'
 import numberFormater from '../middleware/numberMiddlewares'
 
 const router = Router()
 
-router.post('/send', isClientReady, numberFormater, sendMessageToUser)
+router.post('/send', isClientReady, numberFormater, sendMessage)
 
 export default router

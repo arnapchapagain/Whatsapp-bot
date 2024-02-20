@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express'
 import { MessageAck } from 'whatsapp-web.js'
 
-export async function sendMessageToUser (req: Request, res: Response): Promise<void> {
+export async function sendMessage (req: Request, res: Response): Promise<void> {
   const message = req.body.message as string ?? ''
   const number: string = req.body.number as string ?? ''
 
