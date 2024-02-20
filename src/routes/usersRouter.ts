@@ -18,9 +18,9 @@ router.post('/verify', isClientReady, numberFormater, verifyNumber)
 router.post(
   '/sendMessage',
   isClientReady,
-  numberFormater,
-  messageFormatVerify,
   upload.any(),
+  messageFormatVerify,
+  numberFormater,
   sendMessageToUser
 )
 
