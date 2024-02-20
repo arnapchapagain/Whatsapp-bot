@@ -2,8 +2,12 @@ import type { Request, Response } from 'express'
 
 export function getMe (req: Request, res: Response): void {
   const me = globalThis.client.info.wid
+  const name = globalThis.client.info.pushname
+  const platform = globalThis.client.info.platform
   res.status(200).send({
-    me
+    ...me,
+    name,
+    platform
   })
 }
 
