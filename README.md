@@ -5,21 +5,33 @@ This is an unofficial API for Whatsapp Web mainly for sending messages. It is ba
 # Table of Contents
 1. [Installation](#installation)
 2. [Usage](#usage)
-    1. [Starting the server](#starting-the-server)
-    2. [Verify if the a number is valid on WhatsApp](#verify-if-the-a-number-is-valid-on-whatsapp)
-    3. [Sending a message](#sending-a-message)
-    4. [Extras](#extras)
-3. [TODO](#todo)
-4. [Note](#note)
+    - [Development](#development)
+    - [Starting the server](#starting-the-server)
+    - [Deploy in production](#deploy-in-production)
+3. [API Endpoints](#api-endpoints)
+    - [Verify if the a number is valid on WhatsApp](#verify-if-the-a-number-is-valid-on-whatsapp)
+    - [Sending a message](#sending-a-message)
+4. [Extras](#extras)
+5. [TODO](#todo)
+6. [Note](#note)    
 
 ## Installation
 This should install all the dependencies for the project to run. The main ones are whatsapp-web.js and express.
 
 ```bash
 npm install
+OR 
+yarn install
 ```
 
 ## Usage
+
+### Development
+To start the server in development mode, you can use the following command. This will start the server using nodemon which will restart the server whenever you make changes to the code. The port is 3000.
+
+```bash
+npm run dev
+```
 
 ### Starting the server
 To create the server, you need to run the following command. This will start the server on port 3000.
@@ -28,8 +40,31 @@ To create the server, you need to run the following command. This will start the
 npm start
 ```
 
-For the first time login, you need to scan the QR code that appears on the terminal. This will create a session file in the project directory. This session file will be used to login the next time you start the server without verifying the QR again.
+### Scan the QR code
+For the first time login, you need to scan the QR code that appears on the terminal. This will create session directories. These session directories will be cached and you will not need to scan the QR code again on another runs unless you delete the session directory.
 
+### Deploy in production
+> Note: Before starting the production server make sure to first run the [start command mentioned above](#starting-the-server) to generate session file and QR code. Only after that you can deploy the server in production.
+
+To deploy in production, we will use pm2. You should install pm2 globally using the following command.
+
+```bash
+npm install pm2 -g
+```
+
+First build the project using the following command.
+
+```bash
+npm run build
+```
+
+Then start the server using the following command.
+
+```bash
+npm run start:prod
+```
+
+## API Endpoints
 ### Verify if the a number is valid on WhatsApp
 To verify if a number is registered on WhatsApp, you need to send a GET request to the following endpoint.
 
