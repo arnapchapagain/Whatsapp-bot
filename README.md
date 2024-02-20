@@ -2,6 +2,16 @@
 
 This is an unofficial API for Whatsapp Web mainly for sending messages. It is based on the whatsapp-web.js library by @pedroslopez which runs the WhatsApp Web UI on Puppeteer.
 
+# Table of Contents
+1. [Installation](#installation)
+2. [Usage](#usage)
+    1. [Starting the server](#starting-the-server)
+    2. [Verify if the a number is valid on WhatsApp](#verify-if-the-a-number-is-valid-on-whatsapp)
+    3. [Sending a message](#sending-a-message)
+    4. [Extras](#extras)
+3. [TODO](#todo)
+4. [Note](#note)
+
 ## Installation
 This should install all the dependencies for the project to run. The main ones are whatsapp-web.js and express.
 
@@ -79,10 +89,20 @@ This will return a JSON response with the following format.
 }
 ```
 
-### Extras
+## Extras
 Whenever the status of the sent message changes (example message seen by the user), the script currently logs the status of the message on the terminal. This can be changed to whatever you want to do with the status of the message.
 
 ![Alt text](imgs/status_change.png)
 
-### Note
+## TODO
+- [ ] Get the status of a message.
+- [ ] Send media and other file types in message.
+- [ ] Send a message to a group.
+- [ ] Create a group.
+- [ ] Add a user to a group.
+- [ ] Remove a user from a group.
+- [ ] Get the status of a group.
+- [ ] Set group user's privilages.
+
+## Note
 This is a very basic API and is not meant to be used in production. It is just a proof of concept. The API can be extended to do a lot more things as per your needs. Feel free to fork the repo and make changes as per your needs.
