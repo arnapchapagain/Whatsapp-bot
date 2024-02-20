@@ -12,8 +12,6 @@ This is an unofficial API for Whatsapp Web mainly for sending messages. It is ba
     - [Starting the server](#starting-the-server)
     - [Deploy in production](#deploy-in-production)
 3. [API Endpoints](#api-endpoints)
-    - [Verify if the a number is valid on WhatsApp](#verify-if-the-a-number-is-valid-on-whatsapp)
-    - [Sending a message](#sending-a-message)
 4. [Extras](#extras)
 5. [TODO](#todo)  
 
@@ -67,64 +65,7 @@ npm run start:prod
 ```
 
 ## API Endpoints
-### Verify if the a number is valid on WhatsApp
-To verify if a number is registered on WhatsApp, you need to send a GET request to the following endpoint.
-
-The format of the number should be in the [international E.164 format](https://www.twilio.com/docs/glossary/what-e164).
-
-```bash
-POST /is_valid
-```
-
-The body of the request should be in the following format.
-```json
-{
-    "number": "+9779810059586"
-}
-```
-
-This will return a JSON response with the following format.
-
-```json
-{
-    "is_valid": true || false
-}
-```
-
-### Sending a message
-
-To send a message, you need to send a POST request to the following endpoint with the following body.
-
-The format of the number should be in the [international E.164 format](https://www.twilio.com/docs/glossary/what-e164).
-
-```bash
-POST /send_message
-```
-The body of the request should be in the following format.
-```json
-{
-    "number": "+9779810059586",
-    "message": "Hello World!"
-}
-```
-This will return a JSON response with the following format.
-
-```json
-{
-    "status": "Pending to be seen",
-    "sent_to": "9779810059586",
-    "message_id": {
-        "fromMe": true,
-        "remote": {
-            "server": "c.us",
-            "user": "9779810059586",
-            "_serialized": "9779810059586@c.us"
-        },
-        "id": "3EB0ACFF56C525C50D0CE2",
-        "_serialized": "true_9779810059586@c.us_3EB0ACFF56C525C50D0CE2"
-    }
-}
-```
+All the endpoints are documented in the Postman collection. You can find the collection [here](https://www.postman.com/electrobuzz/workspace/my-workspace/api/81a1a3f0-01b8-4142-ae08-e3822a0be47f?action=share&creator=31989932), and on the Run with postman button above.
 
 ## Extras
 Whenever the status of the sent message changes (example message seen by the user), the script currently logs the status of the message on the terminal. This can be changed to whatever you want to do with the status of the message.
