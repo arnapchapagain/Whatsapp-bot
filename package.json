@@ -1,7 +1,7 @@
 {
-  "name": "whatsapp-otp",
+  "name": "whatsapp-api",
   "version": "1.0.0",
-  "description": "A whatsapp-otp API and library using whatsapp-web.js",
+  "description": "A whatsapp API and library using whatsapp-web.js",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.ts",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arnapchapagain/Whatsapp-bot.git"
+    "url": "git+https://github.com/boharasirshak/Whatsapp-API.git"
   },
   "keywords": [
     "Whatsapp",
@@ -18,16 +18,23 @@
   "author": "Arnap Chapagain",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/arnapchapagain/Whatsapp-bot/issues"
+    "url": "https://github.com/boharasirshak/Whatsapp-API.gitissues"
   },
-  "homepage": "https://github.com/arnapchapagain/Whatsapp-bot#readme",
+  "homepage": "https://github.com/boharasirshak/Whatsapp-API.git#readme",
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^20.10.6",
     "@types/qrcode-terminal": "^0.12.2",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^43.0.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
     "nodemon": "^3.0.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "typescript": "*"
   },
   "dependencies": {
     "express": "^4.18.2",
