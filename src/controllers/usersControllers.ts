@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express'
-import { MessageAck } from 'whatsapp-web.js'
+import { MessageAck, MessageMedia, type Message } from 'whatsapp-web.js'
+import { formatMessageAck } from '../utils/formatter'
 
 export async function getMe (req: Request, res: Response): Promise<void> {
   const me = globalThis.client.info.wid
@@ -28,50 +29,60 @@ export async function sendMessageToUser (req: Request, res: Response): Promise<v
   const message = req.body.message as string ?? ''
   const number: string = req.body.number as string ?? ''
 
-  const isValid = await client.isRegisteredUser(req.body.number as string)
-  if (!isValid) {
-    res.status(400).send({
-      error: 'Number is not registered on Whatsapp'
+  try {
+    const isValid = await client.isRegisteredUser(req.body.number as string)
+    if (!isValid) {
+      res.status(404).send({
+        error: 'Number is not registered on Whatsapp'
+      })
+      return
+    }
+
+    const files = req.files as Express.Multer.File[] ?? []
+    const length = req.files?.length as number ?? 0
+
+    if (length === 0) {
+      const sentMessage = await client.sendMessage(number, message)
+      const messageStatus = formatMessageAck(sentMessage.ack)
+
+      if (sentMessage.ack === MessageAck.ACK_ERROR) {
+        res.status(400).send({
+          error: 'Message failed to send'
+        })
+        return
+      }
+
+      res.status(200).send({
+        data: {
+          status: messageStatus,
+          ...sentMessage
+        }
+      })
+      return
+    }
+
+    const responses: Message[] = []
+
+    for (let i = 0; i < length; i++) {
+      const file = MessageMedia.fromFilePath(files[i].path)
+      file.mimetype = files[i].mimetype
+      file.filename = files[i].originalname
+      const sentMessage = await client.sendMessage(number, file, { caption: message })
+
+      if (sentMessage.ack === MessageAck.ACK_ERROR) {
+        res.status(400).send({
+          error: 'Message failed to send'
+        })
+        return
+      }
+      responses.push(sentMessage)
+    }
+    res.status(200).send({
+      data: responses
     })
-    return
-  }
-
-  const sentMessage = await client.sendMessage(number, message)
-  const messageId: object = sentMessage.id
-  const sentTo: string = sentMessage.to
-
-  let messageStatus = ''
-  switch (sentMessage.ack) {
-    case MessageAck.ACK_ERROR:
-      messageStatus = 'Failed to send'
-      break
-    case MessageAck.ACK_PENDING:
-      messageStatus = 'Pending to be seen'
-      break
-    case MessageAck.ACK_SERVER:
-      messageStatus = 'Server'
-      break
-    case MessageAck.ACK_DEVICE:
-      messageStatus = 'Device'
-      break
-    case MessageAck.ACK_READ:
-      messageStatus = 'Read by recipient'
-      break
-    case MessageAck.ACK_PLAYED:
-      messageStatus = 'Played by recipient'
-      break
-  }
-
-  if (sentMessage.ack === MessageAck.ACK_ERROR) {
-    res.status(400).send({
-      error: 'Message failed to send'
+  } catch {
+    res.status(500).send({
+      error: 'Failed to send message'
     })
-    return
   }
-
-  res.status(200).send({
-    status: messageStatus,
-    sent_to: sentTo,
-    message_id: messageId
-  })
 }
