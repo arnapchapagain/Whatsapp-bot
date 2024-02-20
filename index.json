@@ -1,0 +1,22 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "WhatsApp API",
+    "description": "Unofficial API to automate whatsapp"
+  },
+  "paths": {
+    "/users": {
+
+    },
+    "/groups": {
+
+    }
+  },
+  "components": {
+    "schemas": {
+    },
+    "securitySchemes": {
+    }
+  }
+}
