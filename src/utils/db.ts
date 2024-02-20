@@ -79,7 +79,7 @@ class JsonDb<T> {
    * Commit the changes to the database, writing to the file
    */
   public commit (): void {
-    fs.writeFileSync(this._path, JSON.stringify(this._data))
+    fs.writeFileSync(this._path, JSON.stringify(this._data, null, 2))
   }
 }
 
