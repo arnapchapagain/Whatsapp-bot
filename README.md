@@ -2,6 +2,8 @@
 
 This is an unofficial API for Whatsapp Web mainly for sending messages. It is based on the whatsapp-web.js library by @pedroslopez which runs the WhatsApp Web UI on Puppeteer.
 
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/31989932-b44e804b-0ddd-411c-85ff-9815db6e8b06?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D31989932-b44e804b-0ddd-411c-85ff-9815db6e8b06%26entityType%3Dcollection%26workspaceId%3D05c8df04-edb7-47ec-81f1-bf2707c45a72)
+
 # Table of Contents
 1. [Installation](#installation)
 2. [Usage](#usage)
@@ -130,7 +132,7 @@ Whenever the status of the sent message changes (example message seen by the use
 
 ## TODO
 - [ ] Send media and other file types in message.
-- [ ] Send a message to a group.
+- [x] Send a message to a group.
 - [ ] Create a group.
 - [ ] Add a user to a group.
 - [ ] Remove a user from a group.
