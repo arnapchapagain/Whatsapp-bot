@@ -7,7 +7,6 @@ export async function sendMessageToGroup (req: Request, res: Response): Promise<
 
   try {
     const group = await globalThis.client.getChatById(groupId)
-    console.log(group)
     const sentMessage = await group.sendMessage(message)
     const messageId: object = sentMessage.id
     const sentTo: string = sentMessage.to
