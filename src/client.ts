@@ -1,18 +1,17 @@
-import { Client, LocalAuth, Message } from 'whatsapp-web.js';
+import { Client, LocalAuth } from 'whatsapp-web.js'
 
 const client = new Client({
-    authStrategy: new LocalAuth({
-        dataPath: '/session'
-    })
-});
+  authStrategy: new LocalAuth({
+    dataPath: '/session'
+  })
+})
 
-client.on('message', async (message: Message) => {
-	console.log(message.body);
+client.on('message', (message) => {
+  console.log(message.body)
 
-    if(message.body === '!ping') {
-		message.reply('pong');
-	}
-});
+  if (message.body === '!ping') {
+    message.reply('pong').catch(err => { console.error(err) })
+  }
+})
 
-
-export default client;
+export default client
