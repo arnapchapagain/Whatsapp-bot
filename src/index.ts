@@ -1,14 +1,16 @@
 import express, { type Request, type Response } from 'express'
 
+import bodyParser from 'body-parser'
+import { exit } from 'process'
+
 import client from './client'
 import clientReadyMiddleware from './middleware/clientMiddlewares'
-
-import { exit } from 'process'
 import groupsRouter from './routes/groupsRouter'
 import usersRouter from './routes/usersRouter'
 
 const app = express()
 app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/users', usersRouter)
 app.use('/groups', groupsRouter)
 
