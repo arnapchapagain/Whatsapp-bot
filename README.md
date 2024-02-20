@@ -129,7 +129,6 @@ Whenever the status of the sent message changes (example message seen by the use
 ![Alt text](imgs/status_change.png)
 
 ## TODO
-- [ ] Get the status of a message.
 - [ ] Send media and other file types in message.
 - [ ] Send a message to a group.
 - [ ] Create a group.
