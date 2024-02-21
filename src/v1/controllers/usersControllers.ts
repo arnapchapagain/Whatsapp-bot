@@ -63,7 +63,7 @@ export async function sendMessageToUser (req: Request, res: Response): Promise<v
       return
     }
 
-    const sendAsDocument = Boolean(req.body.send_as_document) as boolean ?? false
+    const sendAsDocument = Boolean(req.body.send_as_document) ?? false
     const responses: Message[] = []
 
     for (let i = 0; i < length; i++) {
