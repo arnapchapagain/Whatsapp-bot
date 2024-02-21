@@ -6,12 +6,22 @@ import { version as apiVersion } from '../package.json'
 
 import client from './client'
 import clientReadyMiddleware from './v1/middleware/clientMiddlewares'
+import { basicErrorHandler } from './v1/middleware/errorMiddlewares'
 import groupsRouter from './v1/routes/groupsRouter'
 import usersRouter from './v1/routes/usersRouter'
 
 const app = express()
-app.use(express.json())
+app.use(bodyParser.json({
+  verify: (req, res, buf, enc) => {
+    try {
+      JSON.parse(buf.toString())
+    } catch (e) {
+      throw new Error('Invalid JSON')
+    }
+  }
+}))
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(basicErrorHandler)
 app.use(`/${apiVersion}/users`, usersRouter)
 app.use(`/${apiVersion}/groups`, groupsRouter)
 
