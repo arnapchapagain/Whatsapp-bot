@@ -1,26 +1,20 @@
 import { MessageAck } from 'whatsapp-web.js'
 
 export function formatMessageAck (ack: MessageAck): string {
-  let messageStatus = ''
   switch (ack) {
     case MessageAck.ACK_ERROR:
-      messageStatus = 'Failed to send'
-      break
+      return 'Failed to send'
     case MessageAck.ACK_PENDING:
-      messageStatus = 'Pending to be seen'
-      break
+      return 'Pending to be seen'
     case MessageAck.ACK_SERVER:
-      messageStatus = 'Server'
-      break
+      return 'Sent by server'
     case MessageAck.ACK_DEVICE:
-      messageStatus = 'Device'
-      break
+      return 'Sent by device'
     case MessageAck.ACK_READ:
-      messageStatus = 'Read by recipient'
-      break
+      return 'Read by recipient'
     case MessageAck.ACK_PLAYED:
-      messageStatus = 'Played by recipient'
-      break
+      return 'Played by recipient'
+    default:
+      return 'Unknown'
   }
-  return messageStatus
 }
