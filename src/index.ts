@@ -12,8 +12,8 @@ import usersRouter from './v1/routes/usersRouter'
 const app = express()
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(`${apiVersion}/users`, usersRouter)
-app.use(`${apiVersion}/groups`, groupsRouter)
+app.use(`/${apiVersion}/users`, usersRouter)
+app.use(`/${apiVersion}/groups`, groupsRouter)
 
 client.initialize()
   .then(() => {
