@@ -73,11 +73,11 @@ Whenever the status of the sent message changes (example message seen by the use
 ![Alt text](imgs/status_change.png)
 
 ## TODO
-- [X] Send media and other file types in message.
+- [x] Send media and other file types in message.
 - [x] Send a message to a group.
 - [x] Send the photo or other files as document
 - [x] Send the photo or other files as document to groups
-- [ ] Create a group.
+- [x] Create a group.
 - [ ] Add a user to a group.
 - [ ] Remove a user from a group.
 - [ ] Get the status of a group.
