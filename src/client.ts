@@ -22,7 +22,6 @@ globalThis.IS_AUTHENTICATED = false
 globalThis.client = client
 
 client.on('message', (message) => {
-  console.log('New Message received', message)
   db.insertOne(message)
   db.commit()
 
