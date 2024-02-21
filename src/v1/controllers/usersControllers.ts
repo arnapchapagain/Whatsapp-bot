@@ -92,7 +92,9 @@ export async function sendMessageToUser (req: Request, res: Response): Promise<v
     })
   } catch {
     res.status(500).send({
-      error: 'Failed to send message'
+      error: {
+        message: 'Failed to send message'
+      }
     })
   }
 }
