@@ -2,17 +2,18 @@ import express, { type Request, type Response } from 'express'
 
 import bodyParser from 'body-parser'
 import { exit } from 'process'
+import { version as apiVersion } from '../package.json'
 
 import client from './client'
-import clientReadyMiddleware from './middleware/clientMiddlewares'
-import groupsRouter from './routes/groupsRouter'
-import usersRouter from './routes/usersRouter'
+import clientReadyMiddleware from './v1/middleware/clientMiddlewares'
+import groupsRouter from './v1/routes/groupsRouter'
+import usersRouter from './v1/routes/usersRouter'
 
 const app = express()
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use('/users', usersRouter)
-app.use('/groups', groupsRouter)
+app.use(`${apiVersion}/users`, usersRouter)
+app.use(`${apiVersion}/groups`, groupsRouter)
 
 client.initialize()
   .then(() => {

@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express'
 import { MessageAck, MessageMedia, type Message } from 'whatsapp-web.js'
-import { formatMessageAck } from '../utils/formatter'
+import { formatMessageAck } from '../../utils/formatter'
 
 export async function getMe (req: Request, res: Response): Promise<void> {
   const me = globalThis.client.info.wid
@@ -19,9 +19,11 @@ export async function getMe (req: Request, res: Response): Promise<void> {
 
 export async function verifyNumber (req: Request, res: Response): Promise<void> {
   const isValid = await client.isRegisteredUser(req.body.number as string)
-  const statusCode = isValid ? 200 : 400
+  const statusCode = isValid ? 200 : 404
   res.status(statusCode).send({
-    is_valid: isValid
+    data: {
+      is_valid: isValid
+    }
   })
 }
 
@@ -61,13 +63,21 @@ export async function sendMessageToUser (req: Request, res: Response): Promise<v
       return
     }
 
+    const sendAsDocument = Boolean(req.body.send_as_document) as boolean ?? false
     const responses: Message[] = []
 
     for (let i = 0; i < length; i++) {
       const file = MessageMedia.fromFilePath(files[i].path)
       file.mimetype = files[i].mimetype
       file.filename = files[i].originalname
-      const sentMessage = await client.sendMessage(number, file, { caption: message })
+      const sentMessage = await client.sendMessage(
+        number,
+        file,
+        {
+          caption: message,
+          sendMediaAsDocument: sendAsDocument
+        }
+      )
 
       if (sentMessage.ack === MessageAck.ACK_ERROR) {
         res.status(400).send({
