@@ -2,7 +2,7 @@
 
 This is an unofficial API for Whatsapp Web mainly for sending messages. It is based on the whatsapp-web.js library by @pedroslopez which runs the WhatsApp Web UI on Puppeteer.
 
-[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://www.postman.com/electrobuzz/workspace/my-workspace/api/81a1a3f0-01b8-4142-ae08-e3822a0be47f?action=share&creator=31989932)
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/31989932-b44e804b-0ddd-411c-85ff-9815db6e8b06?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D31989932-b44e804b-0ddd-411c-85ff-9815db6e8b06%26entityType%3Dcollection%26workspaceId%3D05c8df04-edb7-47ec-81f1-bf2707c45a72)
 
 
 # Table of Contents
@@ -65,7 +65,7 @@ npm run start:prod
 ```
 
 ## API Endpoints
-All the endpoints are documented in the Postman collection. You can find the collection [here](https://www.postman.com/electrobuzz/workspace/my-workspace/api/81a1a3f0-01b8-4142-ae08-e3822a0be47f?action=share&creator=31989932), and on the Run with postman button above.
+All the endpoints are documented in the Postman collection. You can find the collection [here](https://www.postman.com/electrobuzz/workspace/my-workspace/collection/31989932-b44e804b-0ddd-411c-85ff-9815db6e8b06?action=share&creator=31989932), and on the Run with postman button above.
 
 ## Extras
 Whenever the status of the sent message changes (example message seen by the user), the script currently logs the status of the message on the terminal. This can be changed to whatever you want to do with the status of the message.
