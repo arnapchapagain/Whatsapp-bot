@@ -2,7 +2,7 @@ import { Router } from 'express'
 import multer from 'multer'
 import * as os from 'os'
 
-import { sendMessageToGroup } from '../controllers/groupsControllers'
+import { createAGroup, sendMessageToGroup } from '../controllers/groupsControllers'
 import isClientReady from '../middleware/clientMiddlewares'
 import messageFormatVerify from '../middleware/messageMiddlewares'
 
@@ -12,6 +12,12 @@ const upload = multer({
   storage: multer.diskStorage({ destination: os.tmpdir() }),
   limits: { fileSize: 2048 * 1024 * 1024 }
 })
+
+router.post(
+  '/',
+  isClientReady,
+  createAGroup
+)
 
 router.post(
   '/sendMessage',

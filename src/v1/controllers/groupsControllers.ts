@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express'
-import { MessageAck, MessageMedia, type Message } from 'whatsapp-web.js'
+import type { Contact, Message } from 'whatsapp-web.js'
+import { MessageAck, MessageMedia } from 'whatsapp-web.js'
 import { formatMessageAck } from '../../utils/formatter'
 
 // TODO: This method is copy-pasted from the sendMessageToUser method in usersControllers.ts
@@ -64,6 +65,53 @@ export async function sendMessageToGroup (req: Request, res: Response): Promise<
     res.status(500).send({
       error: {
         message: 'Failed to send message'
+      }
+    })
+  }
+}
+
+export async function createAGroup (req: Request, res: Response): Promise<void> {
+  const title = req.body.title as string ?? 'New Group'
+  const contactIds = req.body.contacts as string[] ?? []
+  const verifyEveryContact = req.body.verify_every_contact as boolean ?? false
+
+  if (verifyEveryContact) {
+    const contacts: Contact[] = []
+
+    for (let i = 0; i < contactIds.length; i++) {
+      const contactId = contactIds[i]
+      try {
+        const contact = await globalThis.client.getContactById(contactId)
+        contacts.push(contact)
+      } catch {
+        res.status(400).send({
+          error: {
+            message: `Contact with id: ${contactId} is invalid`
+          }
+        })
+        return
+      }
+    }
+  }
+  try {
+    const group = await globalThis.client.createGroup(title, contactIds)
+    if (typeof group === 'string') {
+      res.status(201).send({
+        data: {
+          group
+        }
+      })
+      return
+    }
+    res.status(201).send({
+      data: {
+        ...group
+      }
+    })
+  } catch (e) {
+    res.status(500).send({
+      error: {
+        message: 'Failed to create group'
       }
     })
   }
