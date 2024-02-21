@@ -8,12 +8,14 @@ export async function getMe (req: Request, res: Response): Promise<void> {
   const platform = globalThis.client.info.platform
   const chats = await globalThis.client.getChats()
   const groups = chats.filter(chat => chat.isGroup)
+  const contacts = await globalThis.client.getContacts()
   res.status(200).send({
     ...me,
     name,
     platform,
     chats,
-    groups
+    groups,
+    contacts
   })
 }
 
